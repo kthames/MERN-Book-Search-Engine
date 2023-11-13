@@ -7,7 +7,7 @@ import Auth from '../utils/auth';
 
 const LoginForm = () => {
   const [userFormData, setUserFormData] = useState({ email: '', password: '' });
-  const [login, { error, data }] = useMutation(LOGIN_USER);
+  const [login, { error }] = useMutation(LOGIN_USER);
   const [validated] = useState(false);
   const [showAlert, setShowAlert] = useState(false);
 
@@ -31,9 +31,6 @@ const LoginForm = () => {
         variables: { ...userFormData},
       });
 
-      if (!response.ok) {
-        throw new Error('something went wrong!');
-      }
       console.log(data.login.user);
       Auth.login(data.login.token);
     } catch (err) {
